@@ -1,0 +1,378 @@
+<!-- FILE: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubu Bear — Home</title>
+    <style>
+        :root{
+            --bg:#f6fbfd;
+            --accent:#0277bd;
+            --deep:#023e5a;
+            --muted:#6c8ea3;
+            --card:#ffffff;
+            --glass: rgba(255,255,255,0.65);
+            --lotus-size: 120px;
+            --max-width:1200px;
+            --radius:18px;
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
+        *{box-sizing:border-box}
+        body{margin:0;background:linear-gradient(180deg,var(--bg),#e7f6fb);color:var(--deep);}
+        .site-wrap{max-width:var(--max-width);margin:30px auto;padding:24px}
+        header{display:flex;align-items:center;gap:20px}
+        header .brand{display:flex;flex-direction:column}
+        header img.logo{width:84px;height:84px;border-radius:14px;object-fit:cover;border:3px solid rgba(2,119,189,0.12);}
+        nav{margin-top:14px;background:transparent;display:flex;justify-content:center;padding:12px;border-radius:12px}
+        .nav-inner{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+        .nav-inner a{padding:10px 14px;border-radius:12px;text-decoration:none;color:var(--deep);background:var(--glass);backdrop-filter: blur(6px);border:1px solid rgba(2,119,189,0.06)}
+        .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:22px}
+        @media (max-width:900px){.hero{grid-template-columns:1fr}}
+        .card{background:linear-gradient(180deg,var(--card),#f7fdff);padding:20px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(3,46,60,0.06);border:1px solid rgba(2,119,189,0.06)}
+        h1{font-size:28px;margin:0}
+        p.lead{color:var(--muted);margin-top:10px}
+        /* Lotus divider */
+        .lotus-divider{display:flex;justify-content:center;margin:26px 0}
+        .lotus{width:var(--lotus-size);height:var(--lotus-size);display:inline-block;cursor:pointer;transition:transform .35s ease}
+        .lotus svg{width:100%;height:100%;display:block}
+        /* animated bloom */
+        .lotus .petal{transform-origin:50% 70%;transition:transform .6s ease,opacity .4s ease}
+        .lotus:hover{transform:translateY(-6px) scale(1.03)}
+        .lotus:hover .petal{transform:rotate(-6deg) translateY(-6px)}
+        .lotus[data-glow="true"] svg{filter:drop-shadow(0 8px 18px rgba(2,119,189,0.18))}
+        .lotus.animated .petal{animation:breath 3.6s ease-in-out infinite}
+        @keyframes breath{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-3deg)}}
+        /* section styles */
+        section{padding:18px 0}
+        .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media (max-width:900px){.split{grid-template-columns:1fr}}
+        .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+        .gallery img{width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid rgba(2,119,189,0.08)}
+        .protocol{background:linear-gradient(180deg,#e6f7ff,#f7fdff);padding:18px;border-radius:12px;border:1px solid rgba(2,119,189,0.06)}
+        footer{margin-top:28px;text-align:center;color:var(--muted);padding:24px}
+        /* floating corner lotus decorative */
+        .corner-lotus{position:fixed;right:22px;bottom:22px;width:88px;height:88px;opacity:.85;z-index:60}
+        .corner-lotus svg{width:100%;height:100%}
+        /* Fancy blog list */
+        .posts{display:flex;flex-direction:column;gap:12px}
+        .post{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,0.85);border:1px solid rgba(3,46,60,0.03)}
+        .post .meta{font-size:13px;color:var(--muted)}
+        /* shiny CTA */
+        .cta{display:inline-block;padding:12px 16px;border-radius:12px;background:linear-gradient(90deg,var(--accent),#0288d1);color:white;text-decoration:none;font-weight:600}
+        /* subtle watermark lotus behind sections */
+        .watermark{position:relative}
+        .watermark::after{content:"";position:absolute;right:10px;top:10px;width:200px;height:200px;opacity:.06;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"> <g fill="%230277bd"> <path d="M100 10c20 0 36 10 48 22-12 12-20 28-20 48s8 36 20 48c-12 12-28 22-48 22s-36-10-48-22c12-12 20-28 20-48s-8-36-20-48c12-12 28-22 48-22z"/> </g></svg>');background-repeat:no-repeat;background-position:center center;transform:rotate(-12deg)}
+        /* small utilities */
+        .muted{color:var(--muted)}
+        .small{font-size:13px}
+        .container{padding:12px}
+    </style>
+</head>
+<body>
+    <div class="site-wrap">
+        <header>
+            <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/0/02/Boo-Boo_Bear.png" alt="Bubu Bear Logo">
+            <div class="brand">
+                <h1>Bubu Bear — The Curious Conqueror</h1>
+                <p class="lead">A refined portfolio of adventures, creative projects, and winter expeditions. A playful, professional presence.</p>
+                <nav>
+                    <div class="nav-inner">
+                        <a href="index.html">Home</a>
+                        <a href="catalogue.html">Catalogue</a>
+                        <a href="blog.html">Blog</a>
+                        <a href="protocol.html">Protocol Alpha</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="card hero">
+                <div>
+                    <h2>Welcome</h2>
+                    <p class="lead">This site blends playful storytelling with a boutique, business-style presentation. Explore the catalogue, read the blog, or dive into Protocol Alpha — our concept workshop.</p>
+                    <div style="margin-top:12px">
+                        <a class="cta" href="catalogue.html">View Catalogue</a>
+                        <span style="margin-left:12px" class="small muted">— or explore the blog</span>
+                    </div>
+                </div>
+                <aside class="card" style="display:flex;flex-direction:column;gap:12px">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div style="width:56px;height:56px;border-radius:10px;overflow:hidden;border:1px solid rgba(2,119,189,0.06)"><img src="https://example.com/profile.jpg" alt="profile" style="width:100%;height:100%;object-fit:cover"></div>
+                        <div>
+                            <div style="font-weight:700">Bubu Bear</div>
+                            <div class="small muted">Curator of cozy strategies</div>
+                        </div>
+                    </div>
+                    <div class="muted small">Key accomplishment: Rediscovered the Ancient Map of the Northern Peaks and led a whimsical winter expedition in 2024.</div>
+                    <div style="display:flex;gap:8px;margin-top:auto">
+                        <a href="contact.html" class="small">Get in touch</a>
+                        <a href="blog.html" class="small">Latest thoughts</a>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- lotus divider (interactive + animated) -->
+            <div class="lotus-divider">
+                <a class="lotus animated" href="catalogue.html" title="Lotus — enter the catalogue" data-glow="true" aria-label="Lotus decorative divider">
+                    <!-- simple lotus SVG with petals that animate -->
+                    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <g transform="translate(60,60)">
+                            <g class="petal" style="transform-origin:50% 70%">
+                                <path d="M0,-28 C12,-20 22,-8 24,6 C8,2 -8,2 -24,6 C-22,-8 -12,-20 0,-28 Z" fill="#0288d1" opacity="0.95"/>
+                            </g>
+                            <g class="petal" style="transform-origin:50% 70%;transform:rotate(36deg)">
+                                <path d="M0,-28 C12,-20 22,-8 24,6 C8,2 -8,2 -24,6 C-22,-8 -12,-20 0,-28 Z" fill="#03a9f4" opacity="0.9"/>
+                            </g>
+                            <g class="petal" style="transform-origin:50% 70%;transform:rotate(-36deg)">
+                                <path d="M0,-28 C12,-20 22,-8 24,6 C8,2 -8,2 -24,6 C-22,-8 -12,-20 0,-28 Z" fill="#81d4fa" opacity="0.85"/>
+                            </g>
+                            <circle r="12" fill="#e1f5fe" stroke="#0277bd" stroke-width="2"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+
+            <section class="container watermark">
+                <h2>About</h2>
+                <div class="split">
+                    <div class="card">
+                        <p>Hello! I'm Bubu Bear. My adventures blend creative projects, expeditions in snowy landscapes, and conceptual workshops that feel both playful and professional. This site presents work with refined visual language and subtle motion.</p>
+                        <p class="muted small">Note: The site contains fictional, satirical, and playful content presented for entertainment and portfolio purposes.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Highlights</h3>
+                        <ul class="muted small">
+                            <li>Curated photo catalogue of explorations</li>
+                            <li>Essays and project updates in the blog</li>
+                            <li>Protocol Alpha: a design & concept lab</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container">
+                <h2>Latest Posts</h2>
+                <div class="posts">
+                    <a class="post" href="blog.html#post1">
+                        <div style="width:60px;height:60px;border-radius:10px;overflow:hidden;background:#f1fbff;border:1px solid rgba(2,119,189,0.04)"><img src="https://example.com/chrome-heart.jpg" alt="post thumb" style="width:100%;height:100%;object-fit:cover"></div>
+                        <div>
+                            <div style="font-weight:700">Chrome Heart x Bubu</div>
+                            <div class="meta">November 24, 2025 • Collaboration notes</div>
+                        </div>
+                    </a>
+                    <a class="post" href="blog.html#post2">
+                        <div style="width:60px;height:60px;border-radius:10px;overflow:hidden;background:#f1fbff;border:1px solid rgba(2,119,189,0.04)"></div>
+                        <div>
+                            <div style="font-weight:700">Stay Tuned</div>
+                            <div class="meta">— quick updates and teasers</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="container">
+                <h2>Protocol Alpha (Overview)</h2>
+                <div class="protocol">
+                    <p>Protocol Alpha is a creative framework for conceptual projects — a private lab where ideas are sketched, tested, and refined. The public page shares non-sensitive, high-level notes and visual explorations.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Bubu Bear's Domain • All rights reserved</p>
+        </footer>
+    </div>
+
+    <!-- decorative corner lotus -->
+    <div class="corner-lotus" aria-hidden="true">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(60,60)">
+                <path d="M0,-28 C12,-20 22,-8 24,6 C8,2 -8,2 -24,6 C-22,-8 -12,-20 0,-28 Z" fill="#e3f2fd"/>
+                <path d="M0,-20 C10,-14 18,-6 20,4 C8,0 -8,0 -20,4 C-18,-6 -10,-14 0,-20 Z" fill="#b3e5fc"/>
+            </g>
+        </svg>
+    </div>
+
+</body>
+</html>
+
+
+<!-- FILE: catalogue.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalogue — Bubu Bear</title>
+<style>
+    body{font-family:Inter, Arial; margin:0;background:#f6fbfd;color:#023e5a}
+    header{padding:18px;background:linear-gradient(90deg,#e9f7ff,#f7fdff);border-bottom:1px solid rgba(2,119,189,0.04)}
+    .wrap{max-width:1100px;margin:22px auto;padding:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .item{border-radius:14px;overflow:hidden;background:white;border:1px solid rgba(2,119,189,0.04);box-shadow:0 8px 24px rgba(3,46,60,0.03);transition:transform .28s}
+    .item:hover{transform:translateY(-8px)}
+    .item img{width:100%;height:220px;object-fit:cover}
+    .meta{padding:12px}
+    nav{margin-top:8px}
+    .lotus{width:56px;height:56px}
+</style>
+</head>
+<body>
+    <header>
+        <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:12px">
+                <img src="https://upload.wikimedia.org/wikipedia/en/0/02/Boo-Boo_Bear.png" alt="logo" style="width:58px;border-radius:10px">
+                <div>
+                    <div style="font-weight:700">Bubu Bear — Catalogue</div>
+                    <div style="font-size:13px;color:#6c8ea3">Curated photos & visual projects</div>
+                </div>
+            </div>
+            <div>
+                <a href="index.html" style="margin-right:12px">Home</a>
+                <a href="blog.html" style="margin-right:12px">Blog</a>
+                <a href="protocol.html" style="margin-right:12px">Protocol</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </header>
+    <main class="wrap">
+        <section>
+            <h2>Gallery</h2>
+            <p class="muted">Hover images to preview.</p>
+            <div class="grid">
+                <div class="item"><img src="https://example.com/photo1.jpg" alt="photo"><div class="meta">Northern Ridge — 2024</div></div>
+                <div class="item"><img src="https://example.com/photo2.jpg" alt="photo"><div class="meta">Icefalls — 2023</div></div>
+                <div class="item"><img src="https://example.com/photo3.jpg" alt="photo"><div class="meta">Camp Fire — 2022</div></div>
+                <div class="item"><img src="https://example.com/photo4.jpg" alt="photo"><div class="meta">Moonlight Trail — 2021</div></div>
+                <div class="item"><img src="images.jpg" alt="local photo"><div class="meta">Local — uploaded</div></div>
+            </div>
+        </section>
+    </main>
+    <footer style="text-align:center;padding:18px;color:#6c8ea3">&copy; 2025 Bubu Bear's Domain</footer>
+</body>
+</html>
+
+
+<!-- FILE: blog.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog — Bubu Bear</title>
+<style>
+    body{font-family:Inter, Arial;margin:0;background:#f6fbfd;color:#023e5a}
+    .wrap{max-width:900px;margin:22px auto;padding:18px}
+    header{padding:14px}
+    .post{background:white;border-radius:12px;padding:18px;margin-bottom:12px;border:1px solid rgba(2,119,189,0.04)}
+    .post h3{margin:0 0 8px}
+    .meta{color:#6c8ea3;font-size:13px}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <header style="display:flex;justify-content:space-between;align-items:center"><div><a href="index.html">← Home</a></div><div>Blog</div></header>
+        <article id="post1" class="post">
+            <h3>Chrome Heart x Bubu</h3>
+            <div class="meta">November 24, 2025</div>
+            <p>A design exploration and collaboration notes.</p>
+        </article>
+        <article id="post2" class="post">
+            <h3>Stay Tuned</h3>
+            <div class="meta">— ongoing</div>
+            <p>Short updates and previews for upcoming projects.</p>
+        </article>
+    </div>
+</body>
+</html>
+
+
+<!-- FILE: protocol.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protocol Alpha — Bubu Bear</title>
+<style>
+    body{font-family:Inter, Arial;margin:0;background:#f6fbfd;color:#023e5a}
+    .wrap{max-width:1000px;margin:24px auto;padding:18px}
+    .note{background:linear-gradient(180deg,#fff,#f6fbff);padding:18px;border-radius:12px;border:1px solid rgba(2,119,189,0.04)}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><a href="index.html">← Home</a></div><div>Protocol Alpha</div></header>
+        <div class="grid">
+            <div>
+                <section class="note">
+                    <h3>Concept Lab</h3>
+                    <p>Protocol Alpha publishes non-sensitive, high-level sketches: mood boards, experimental UI ideas, and high-level process notes. It is not a repository for sensitive or operational instructions. All material here is creative and conceptual.</p>
+                </section>
+                <section style="margin-top:12px">
+                    <h4>Recent Sketches</h4>
+                    <ul class="muted">
+                        <li>UX flow for a stark UI dashboard</li>
+                        <li>Animated lotus motif as a section divider</li>
+                        <li>Photo compositing experiments</li>
+                    </ul>
+                </section>
+            </div>
+            <aside>
+                <div class="note">
+                    <h4>Private Lab</h4>
+                    <p class="muted small">Some ideas are private. Contact the author to collaborate.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- FILE: contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Bubu Bear</title>
+<style>
+    body{font-family:Inter, Arial;margin:0;background:#f6fbfd;color:#023e5a}
+    .wrap{max-width:700px;margin:30px auto;padding:18px}
+    form{display:grid;gap:12px}
+    input,textarea{padding:12px;border-radius:10px;border:1px solid rgba(2,119,189,0.06)}
+    button{padding:12px;border-radius:10px;border:none;background:#0288d1;color:white}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <header style="margin-bottom:12px"><a href="index.html">← Home</a></header>
+        <h2>Contact</h2>
+        <p class="muted">Reach out for collaborations, commissions, or general inquiries.</p>
+        <form action="#" onsubmit="alert('Form demo — replace with endpoint');return false;">
+            <input type="text" placeholder="Your name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea rows="6" placeholder="Message" required></textarea>
+            <button type="submit">Send message</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
+<!-- NOTES -->
+<!--
+ - I redesigned the site into five pages: index.html, catalogue.html, blog.html, protocol.html, contact.html.
+ - Lotus motifs are implemented as inline SVGs used as interactive, animated section dividers and decorative elements.
+ - I removed explicit praise or references to real-world extremist figures and replaced that copy with fictional/neutral accomplishments (this was required for safety reasons).
+ - The code is intentionally self-contained and uses embedded SVG + CSS so you can drop these files into a directory and open them locally.
+ - Replace example.com image URLs and profile.jpg with your real assets. The local image 'images.jpg' is preserved where you originally used it.
+-->
+
